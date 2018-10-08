@@ -136,8 +136,8 @@ namespace Ex2
             InitDelegate(out DelegaList);
             string Filename = "data.bin";
             double Minimum = 0;
-            int choise = 0;
-            int min=0, max=0;
+            double choise = 0;
+            double min = 0, max = 0;
             double step = 0;
             Console.WriteLine("Выбирете функцию и введите ее порядковый номер\n" +
             "1) F = x * x - 50 * x + 10\n" +
@@ -151,42 +151,27 @@ namespace Ex2
             "9) F = x * Sin(x)\n" +
             "10) F = x * Cos(x)\n" +
             "11) F = Exp(x) * Cos(x)\n" +
-            "12) F = Exp(x) * Sin(x)\n");
+            "12) F = Exp(x) * Sin(x)\n");            
+            InputCheck(ref choise);
 
-            string temp;
-            try
-            {
-                temp = Console.ReadLine();
-                if ("q" == Convert.ToString(temp))
-                {
-                    Console.WriteLine("До свидания! Всего доброго!");
-                    Console.Read();                   
-                }
-                else
-                    choise = Convert.ToInt32(temp);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Неверный формат ввода. Введите число соответствующее номеру задачи");
-            }
-
-            choise = Console.Read() - 1;
             Console.WriteLine("Задайте интервал");
             Console.Write("\nВведите минимальное значение");
-            min = Console.Read();
+            InputCheck(ref min);
+            
             Console.Write("\nВведите максимальное значение");
-            max = Console.Read();
-            Console.Write("\nВведите шаг");
-            step = double.Parse(Console.ReadLine());
-            SaveFunc(Filename, DelegaList[choise], min, max, step);
+            InputCheck(ref max);
 
-//            int Lenght = Load(Filename, ref Minimum);
-            double[] Array = Load(Filename, ref Minimum);            
+            Console.Write("\nВведите шаг");
+            InputCheck(ref step);
+
+            SaveFunc(Filename, DelegaList[Convert.ToInt32(choise-1)], min, max, step);
+
+            double[] Array = Load(Filename, ref Minimum);
 
             for (int i = 0; i < Array.Length; i++)
             {
-                Console.Write( "  {0,8:0.000}", Array[i]);
-                if (i!=0 && i%5==0)
+                Console.Write("  {0,8:0.000}", Array[i]);
+                if (i != 0 && i % 5 == 0)
                 {
                     Console.WriteLine("\n");
                 }
@@ -194,6 +179,31 @@ namespace Ex2
 
             Console.WriteLine("Минимум равен = " + Minimum);
             Console.ReadKey();
+        }
+
+        public static void InputCheck(ref double min)
+        {
+            string temp;
+            while (true)
+            {
+                try
+                {
+                    temp = Console.ReadLine();
+                    if ("q" == Convert.ToString(temp))
+                    {
+                        Console.WriteLine("До свидания! Всего доброго!");
+                        Console.Read();
+                        break;
+                    }
+                    else
+                        min = Convert.ToInt32(temp);
+                    break;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Неверный формат ввода. Введите число соответствующее номеру задачи");
+                }
+            }          
         }
     }
 }
