@@ -126,7 +126,7 @@ namespace Ex3
 
             list.Sort(new Comparison<Student>(StudCourseAge));
             foreach (var v in list) Console.WriteLine(v.firstName + " " + v.course + " Курс " + v.age + " Лет");
-
+            Console.WriteLine("\n")
             Console.WriteLine(DateTime.Now - dt);
             Console.ReadKey();
         }

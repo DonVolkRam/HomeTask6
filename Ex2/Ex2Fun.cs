@@ -164,13 +164,13 @@ namespace Ex2
             InputCheck(ref choise);
 
             Console.WriteLine("Задайте интервал");
-            Console.Write("\nВведите минимальное значение");
+            Console.Write("\nВведите минимальное значение ");
             InputCheck(ref min);
             
-            Console.Write("\nВведите максимальное значение");
+            Console.Write("\nВведите максимальное значение ");
             InputCheck(ref max);
 
-            Console.Write("\nВведите шаг");
+            Console.Write("\nВведите шаг ");
             InputCheck(ref step);
 
             SaveFunc(Filename, DelegaList[Convert.ToInt32(choise-1)], min, max, step);
@@ -186,7 +186,7 @@ namespace Ex2
                 }
             }
 
-            Console.WriteLine("Минимум равен = " + Minimum);
+            Console.WriteLine("\nМинимум равен = " + Minimum);
             Console.ReadKey();
         }
 
