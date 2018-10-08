@@ -10,7 +10,6 @@ namespace HomeTask6
     {
         static void Main(string[] args)
         {
-
         }
     }
 }
