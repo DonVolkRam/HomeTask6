@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A5856914-1F24-4231-AACD-BC460A2FE391}</ProjectGuid>
+    <ProjectGuid>{1A146DFA-70DB-40D2-A4E7-42426CA3777C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>HomeTask6</RootNamespace>
-    <AssemblyName>HomeTask6</AssemblyName>
+    <RootNamespace>Ex2</RootNamespace>
+    <AssemblyName>Ex2</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,26 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Ex2Fun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Students.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Ex1\Ex1.csproj">
-      <Project>{f0adcb3b-09ba-4483-a4e0-1ec6e2f2a409}</Project>
-      <Name>Ex1</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ex2\Ex2.csproj">
-      <Project>{1a146dfa-70db-40d2-a4e7-42426ca3777c}</Project>
-      <Name>Ex2</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ex3\Ex3.csproj">
-      <Project>{632e9f81-a977-47f5-a41f-4df0ac274b21}</Project>
-      <Name>Ex3</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
