@@ -53,7 +53,6 @@ namespace Ex3
             return String.Compare((100*st1.course + st1.age).ToString(), (100*st2.course + st2.age).ToString());
         }
 
-
         public static void Main()
         {
             int bakalavr = 0;
@@ -78,7 +77,7 @@ namespace Ex3
                             string[] temp = sr.ReadLine().Split(';');
                         }
                         firstRead = false;
-                    }   
+                    }
                     string[] s = sr.ReadLine().Split(';');
                     // Добавляем в список новый экземпляр класса Student
                     list.Add(new
@@ -108,11 +107,11 @@ namespace Ex3
                     if (Console.ReadKey().Key == ConsoleKey.Escape) return;
                 }
             }
-            sr.Close();            
+            sr.Close();
             Console.WriteLine("Всего студентов : " + list.Count);
             Console.WriteLine("Бакалавров : {0}\n", bakalavr);
             Console.WriteLine("Магистров : {0}", magistr);
-            
+
             for (int i = 1; i < MaxCourses; i++)
             {
                 Console.Write("Количество стдентов на {0} курсе = {1} ", i, courses[i]);
@@ -126,10 +125,72 @@ namespace Ex3
             //foreach (var v in list) Console.WriteLine(v.firstName + " " + v.age + " лет ");
 
             list.Sort(new Comparison<Student>(StudCourseAge));
-            foreach (var v in list) Console.WriteLine(v.firstName + " " + v.course + " Курс " + v.age + " Лет");
+            int AgeMin = 18, AgeMax = 20, Course = 1;
+            string department = "Военная";
+            Predicate<Student> isOlder = x => x.age >= AgeMin;
+            Predicate<Student> isYounger = x => x.age <= AgeMax;
+            Predicate<Student> isCourse = x => x.course == Course;
+            Predicate<Student> isCathedral = x => String.Equals(x.department, department);
+
+            List<Predicate<Student>> PredyList = new List<Predicate<Student>>
+            {
+                isOlder,
+                isYounger,
+                isCathedral
+            };
+
+            #region формирование метода с предикатами для подсчета количества студентов по параметрам
+            
+            Console.WriteLine("Cстудентов по параметрам = " + CountStudents(list, PredyList));
+            #endregion формирование метода с предикатами для подсчета количества студентов по параметрам
+
+            //foreach (var v in list) Console.WriteLine(v.firstName + " " + v.course + " Курс " + v.age + " Лет");
+            //Console.WriteLine(v.firstName + " " + v.course + " Курс " + v.age + " Лет");
             Console.WriteLine("\n");
             Console.WriteLine(DateTime.Now - dt);
             Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Метод посчета количества студентов по заданным параметрам
+        /// </summary>
+        /// <param name="StudList">Список студентов</param>
+        /// <param name="PredyList">Список параметров</param>
+        /// <returns>Возвращает количество студентов удовлетворяющим условиям параметров</returns>
+        public static int CountStudents(List<Student>StudList, List<Predicate<Student>> PredyList)
+        {
+            int countStudents = 0;
+
+            //int AgeMin = 0, AgeMax = 100, Course = 1;
+            
+            //string department = "Военная";
+            //Predicate<Student> isOlder = x => x.age >= AgeMin;
+            //Predicate<Student> isYounger = x => x.age <= AgeMax;
+            //Predicate<Student> isCourse = x => x.course == Course;
+            //Predicate<Student> isCathedral = x => String.Equals(x.department, department);
+
+            //Сколько предикатов внесем в этот лист, по стольким критериям пройтет отбор студентов
+            //List<Predicate<Student>> PredyList = new List<Predicate<Student>>
+            //{
+            //    isOlder,
+            //    isYounger,
+            //};
+
+            bool Bcheck = false;
+            foreach (var v in StudList)
+            {
+                Bcheck = true;
+                for (int i = 0; i < PredyList.Count; i++)
+                {
+                    if (!PredyList[i](v))
+                        Bcheck = false;
+                }
+                if (Bcheck)
+                    countStudents++;
+                //Console.WriteLine(v.firstName + " " + v.course + " Курс " + v.age + " Лет");
+            }
+
+            return countStudents;
         }
     }
 }
