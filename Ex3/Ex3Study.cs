@@ -9,7 +9,8 @@ using System.IO;
 в) отсортировать список по возрасту студента;
 г) *отсортировать список по курсу и возрасту студента;
 д) **разработать единый метод подсчета количества студентов по различным параметрам
-выбора с помощью делегата и методов предикатов.
+выбора с помощью делегата и методов предикатов.
+
 Выполнил Волков Кирилл
 */
 namespace Ex3
@@ -22,7 +23,7 @@ namespace Ex3
         /// <param name="st1"></param>
         /// <param name="st2"></param>
         /// <returns>Сравнивает два указанных объекта System.String и возвращает целое число, которое
-        //     показывает их относительное положение в порядке сортировки.</returns>
+        ///     показывает их относительное положение в порядке сортировки.</returns>
         static int StudName(Student st1, Student st2)
         {
             return String.Compare(st1.firstName, st2.firstName); 
@@ -34,7 +35,7 @@ namespace Ex3
         /// <param name="st1"></param>
         /// <param name="st2"></param>
         /// <returns>Сравнивает два указанных объекта System.String и возвращает целое число, которое
-        //     показывает их относительное положение в порядке сортировки.</returns>
+        ///     показывает их относительное положение в порядке сортировки.</returns>
         static int StudAge(Student st1, Student st2) 
         {
             return String.Compare(st1.age.ToString(), st2.age.ToString()); 
@@ -46,7 +47,7 @@ namespace Ex3
         /// <param name="st1"></param>
         /// <param name="st2"></param>
         /// <returns>Сравнивает два указанных объекта System.String и возвращает целое число, которое
-        //     показывает их относительное положение в порядке сортировки.</returns>
+        ///     показывает их относительное положение в порядке сортировки.</returns>
         static int StudCourseAge(Student st1, Student st2) 
         {
             return String.Compare((100*st1.course + st1.age).ToString(), (100*st2.course + st2.age).ToString());
