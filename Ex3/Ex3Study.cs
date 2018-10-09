@@ -125,21 +125,24 @@ namespace Ex3
             //foreach (var v in list) Console.WriteLine(v.firstName + " " + v.age + " лет ");
 
             list.Sort(new Comparison<Student>(StudCourseAge));
+            #region формирование метода с предикатами для подсчета количества студентов по параметрам
+            //эти параметры можно получать от ввода с клавиатуры
             int AgeMin = 18, AgeMax = 20, Course = 1;
             string department = "Военная";
+
+            //Определение предикатов
             Predicate<Student> isOlder = x => x.age >= AgeMin;
             Predicate<Student> isYounger = x => x.age <= AgeMax;
             Predicate<Student> isCourse = x => x.course == Course;
             Predicate<Student> isCathedral = x => String.Equals(x.department, department);
 
+            //формирование списка параметров поиска, можно использовать add();    
             List<Predicate<Student>> PredyList = new List<Predicate<Student>>
             {
                 isOlder,
                 isYounger,
                 isCathedral
-            };
-
-            #region формирование метода с предикатами для подсчета количества студентов по параметрам
+            };          
             
             Console.WriteLine("Cстудентов по параметрам = " + CountStudents(list, PredyList));
             #endregion формирование метода с предикатами для подсчета количества студентов по параметрам
@@ -151,6 +154,7 @@ namespace Ex3
             Console.ReadKey();
         }
 
+        public delegate int DeleCount(List<Student> LS, List<Predicate<Student>> LPS);
         /// <summary>
         /// Метод посчета количества студентов по заданным параметрам
         /// </summary>
@@ -160,34 +164,16 @@ namespace Ex3
         public static int CountStudents(List<Student>StudList, List<Predicate<Student>> PredyList)
         {
             int countStudents = 0;
-
-            //int AgeMin = 0, AgeMax = 100, Course = 1;
-            
-            //string department = "Военная";
-            //Predicate<Student> isOlder = x => x.age >= AgeMin;
-            //Predicate<Student> isYounger = x => x.age <= AgeMax;
-            //Predicate<Student> isCourse = x => x.course == Course;
-            //Predicate<Student> isCathedral = x => String.Equals(x.department, department);
-
-            //Сколько предикатов внесем в этот лист, по стольким критериям пройтет отбор студентов
-            //List<Predicate<Student>> PredyList = new List<Predicate<Student>>
-            //{
-            //    isOlder,
-            //    isYounger,
-            //};
-
             bool Bcheck = false;
+
             foreach (var v in StudList)
             {
                 Bcheck = true;
                 for (int i = 0; i < PredyList.Count; i++)
-                {
                     if (!PredyList[i](v))
                         Bcheck = false;
-                }
                 if (Bcheck)
-                    countStudents++;
-                //Console.WriteLine(v.firstName + " " + v.course + " Курс " + v.age + " Лет");
+                    countStudents++;             
             }
 
             return countStudents;
